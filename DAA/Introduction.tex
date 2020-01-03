@@ -1,0 +1,83 @@
+\documentclass[./AlgorithmDesign.tex]{subfiles}
+
+\begin{document}
+\section[Introduction]{Introduction to Algorithms}
+An algorithm is a sequence of unambiguous instructions for solving a problem i.e. for obtaining a required output
+for any legitimate(valid) input in finite time.
+
+% = = = = = = PERFORMANCE/ANALYSIS OF ALGORITHMS = = = = = = 
+\subsection{Performance/Analysis of Algorithms}
+It refers to the memory and time representation of the program.
+
+Methods of Analysis: 
+\begin{itemize}
+\item Analytical
+\item Experimental
+\end{itemize}
+
+Any algorithm is analysed on the following criteria:
+\begin{itemize}
+\item Space Complexity
+\item Time Complexity
+\end{itemize}
+
+\subsubsection{Space Complexity}
+It is the amount of memory required for a program to completion.
+It has 3 categories:
+
+\begin{itemize}
+\item Instruction Space (Compiled Program)
+\item Data Space (Space needed by var/const)
+\item Environment Stack Space (Recursive calls)
+\end{itemize}
+
+\fbox{Denoted by: \textbf{$C + S_p$}}
+
+\newpage
+
+\subsubsection*{Sample Questions}
+\begin{enumerate}
+\item Sum of array without recursion
+\begin{mdframed}
+\begin{lstlisting}[label=c1]
+int sum(int a[],int n) @\label{c1:l1}@
+{
+    int sum = 0; @\label{c1:l3}@
+    for(int i = 0;i < n;i++) @\label{c1:l4}@
+        sum = sum + a[i]; 
+    return sum; @\label{c1:l6}@
+}
+\end{lstlisting}
+
+\fbox{Space Complexity: $6x$  bytes\footnote{where $x$ is bytes occupied by int}}
+\vspace{3mm}
+
+Reason: 
+Line \ref{c1:l1} occupies $x$ bytes for pointer \textit{a} and $x$ bytes for integer \textit{n}. 
+Line \ref{c1:l3} occupies $x$ bytes for sum and $x$ bytes for allocating 0. 
+Line \ref{c1:l4} will occupy $x$ bytes for allocating integer $i$.
+In Line \ref{c1:l6} space will reserved for returning data.
+\end{mdframed}
+
+\item Sum of array with recursion
+\begin{mdframed}
+\begin{lstlisting}[label=c2]
+int sum(int a[],int n) @\label{c2:l1}@
+{
+    if(n > 0)
+        return sum(a,n-1) + a[n-1]; @\label{c2:l4}@
+    return 0; @\label{c2:l5}@
+}
+\end{lstlisting}
+
+\fbox{Space Complexity: $3x\times (n + 1)$  bytes\footnote{where $x$ is bytes occupied by int and $n$ is the size of array}}
+\vspace{3mm}
+
+Reason: 
+Line \ref{c2:l1} occupies $x$ bytes for pointer \textit{a} and $x$ bytes for integer \textit{n}. 
+Line \ref{c2:l4} will execute n times and each time space is reserved for pointer $a$ and $n-1$ thus giving $3x\times n$. 
+During the last case of $n = 0$, Line \ref{c2:l5} will be executed returing 0 thus occupying $x$ bytes.
+
+\end{mdframed}
+\end{enumerate}
+\end{document}

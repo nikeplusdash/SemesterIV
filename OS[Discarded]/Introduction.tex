@@ -1,0 +1,90 @@
+\documentclass[./OperatingSystems.tex]{subfiles}
+
+\begin{document}
+\section[Introduction]{Introduction to Operating Systems}
+
+% = = = = = = DEFINITION = = = = = =
+\subsection{Definition}
+A program that acts as an intemediary between user of a computer and computer hardware.
+
+Goals:
+
+\begin{itemize}
+\item Execute user programs
+\item Making it easier to use compute hardware
+\item Efficient way to use computer hardware
+\end{itemize}
+
+% = = = = = = FUNCTIONS = = = = = =
+\subsection{Functions}
+
+\begin{mdframed}
+A good OS should have following:
+\begin{itemize}
+\item Ease of use
+\item Good Performance
+\item Resource Utilization
+\end{itemize}    
+\end{mdframed}
+
+OS is a resource allocator which manages all resources suchs as CPU time, storage devices etc, and decides between conflicting requests by processes for efficient and fair usage of resource.
+It is a control program that controls execution of programs to prevent misuse and managing control over devices.
+A \textbf{kernel} is component which keeps running all the time.
+
+\begin{notes}
+Bootstrap is loaded at the power-up/reboot and is stored in ROM/EPROM and initializes all aspects of system.
+\end{notes}
+
+% = = = = = = STRUCTURE = = = = = =
+\subsection{Structure}
+
+\subsubsection*{Multiprogramming\footnote{Batch System}}
+One program cannot be keep the CPU busy and thus this calls for some kind of management which in this case is job scheduling.
+A subset of all the programs is kept in the memory.One job is selected and run via job scheduling.
+
+\subsubsection*{Time Sharing\footnote{Multitasking}}
+This is an extension of multiprogramming in which CPU switches job so frequently that users can interact with each job. Time sharing should be $< 1ms$.
+If the processes don't fit in memory, swapping moves them in \& out to run. \textbf{Virtual Memory} allows execution of processes not completely in memory.
+
+% = = = = = = INTERRUPTS = = = = = =
+\subsection{Interrupts}
+
+Interrupts alert CPU to events that require attention. Interrupt transfers control to the Interrupt Service Routine generally through 
+\textbf{Interrupt vector}, a vector which contains the addresses of all service routines. When a CPU is interrupted, it immidiately transfer execution to that particular location. 
+As soon as the interrputed process is completed the CPU should return to the interrupted computation.
+
+\subsubsection*{Interrupt Driven}
+\begin{itemize}
+\item[-] \textbf{Hardware Interrupt} driven by one of the devices.
+\item[-] \textbf{Software Interrupt} (Execution or Trap):
+\begin{itemize}
+    \item[$\bullet$] Software Error
+    \item[$\bullet$] Request for OS Service
+    \item[$\bullet$] Other process problems include infinite loop,processes modifying each other or the operating system.
+\end{itemize}
+\end{itemize}
+
+% = = = = = = OS OPERATIONS = = = = = =
+\subsection{OS Operations}
+
+\subsubsection{Dual Mode Operation}
+
+
+\end{document}
+
+% \definecolor{notecol}{rgb}{0.73,0.56,0.64}
+% \newtcolorbox{note}{
+%     arc=0pt,
+%     boxrule=0pt,
+%     colback=notecol,
+%     width=\textwidth,   % this option controls the width of the box
+%     colupper=white,
+%     fontupper=\bfseries
+% }
+
+% \begin{center}
+% \doublebox{
+% \begin{minipage}{\textwidth}
+% Over the past twenty years, the study of industrial organization—the analysis of imperfectly competitive markets—has grown from a niche area of microeconomics to a key component of economics.
+% \end{minipage}}
+% \end{center}

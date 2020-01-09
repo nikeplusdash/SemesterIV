@@ -1,0 +1,266 @@
+\documentclass[./AlgorithmDesign.tex]{subfiles}
+
+\begin{document}
+\section[Introduction]{Introduction to Algorithms}
+An algorithm is a sequence of unambiguous instructions for solving a problem i.e. for obtaining a required output
+for any legitimate(valid) input in finite time.
+
+% = = = = = = PERFORMANCE/ANALYSIS OF ALGORITHMS = = = = = = 
+\subsection{Performance/Analysis of Algorithms}
+It refers to the memory and time representation of the program.
+
+Methods of Analysis: 
+\begin{itemize}
+\item Analytical
+\item Experimental
+\end{itemize}
+
+Any algorithm is analysed on the following criteria:
+\begin{itemize}
+\item Space Complexity
+\item Time Complexity
+\end{itemize}
+
+\subsubsection{Space Complexity}
+It is the amount of memory required for a program to completion.
+It has 3 categories:
+
+\begin{itemize}
+\item Instruction Space (Compiled Program)
+\item Data Space (Space needed by var/const)
+\item Environment Stack Space (Recursive calls)
+\end{itemize}
+
+\fbox{Denoted by: \textbf{$C + S_p$}}
+
+\newpage
+
+\subsubsection*{Sample Questions}
+\begin{enumerate}
+\item Sum of array without recursion
+\begin{mdframed}
+\begin{lstlisting}[label=c1]
+int sum(int a[],int n) @\label{c1:l1}@
+{
+    int sum = 0; @\label{c1:l3}@
+    for(int i = 0;i < n;i++) @\label{c1:l4}@
+        sum = sum + a[i]; 
+    return sum; @\label{c1:l6}@
+}
+\end{lstlisting}
+
+\fbox{Space Complexity: $6x$  bytes\footnote{where $x$ is bytes occupied by int}}
+\vspace{3mm}
+
+Reason: 
+Line \ref{c1:l1} occupies $x$ bytes for pointer \textit{a} and $x$ bytes for integer \textit{n}. 
+Line \ref{c1:l3} occupies $x$ bytes for sum and $x$ bytes for allocating 0. 
+Line \ref{c1:l4} will occupy $x$ bytes for allocating integer $i$.
+In Line \ref{c1:l6} space will reserved for returning data.
+\end{mdframed}
+
+\item Sum of array with recursion
+\begin{mdframed}
+\begin{lstlisting}[label=c2]
+int sum(int a[],int n) @\label{c2:l1}@
+{
+    if(n > 0)
+        return sum(a,n-1) + a[n-1]; @\label{c2:l4}@
+    return 0; @\label{c2:l5}@
+}
+\end{lstlisting}
+
+\fbox{Space Complexity: $3x\times (n + 1)$  bytes\footnote{where $x$ is bytes occupied by int and $n$ is the size of array}}
+\vspace{3mm}
+
+Reason: 
+Line \ref{c2:l1} occupies $x$ bytes for pointer \textit{a} and $x$ bytes for integer \textit{n}. 
+Line \ref{c2:l4} will execute n times and each time space is reserved for pointer $a$ and $n-1$ thus giving $3x\times n$. 
+During the last case of $n = 0$, Line \ref{c2:l5} will be executed returing 0 thus occupying $x$ bytes.
+\end{mdframed}
+
+\item Linear Search using Recursion 
+\begin{mdframed}
+\begin{lstlisting}[label=c3]
+int search(int a[],int n,int n) 
+{
+     if(n < 1) return -1;
+     if(a[n-1] == x) return x-1;
+     search(a,n-1,x); @\label{c3:l5}@
+}
+\end{lstlisting}
+
+\fbox{Space Complexity: $8x\times (n + 1)$  bytes\footnote{where $x$ is bytes occupied by int and $n$ is the size of array}}
+\vspace{3mm}
+
+Reason: 
+Line \ref{c3:l5} occupies $8$ bytes for everytime it's executed and similar to previous question we get $n+1$ total executions.
+\end{mdframed}
+\end{enumerate}
+
+\subsubsection{Time Complexity}
+
+There are 2 approaches to estimate time:
+\begin{itemize}
+    \item Operation Counter
+    \item Step Counter
+\end{itemize}
+
+\subsubsection*{Sample Questions}
+\begin{enumerate}
+\item Finding max element position
+\begin{mdframed}
+\begin{lstlisting}[label=c4]
+int maxpos(int a[],int n) {
+    int pos = 0;
+    for(int i = 0;i < n;i++)
+        if(a[pos] > a[i]) pos = i; @\label{c4:l4}
+    return pos;
+}
+\end{lstlisting}
+
+\fbox{Time Complexity: $n - 1$}
+\vspace{3mm}
+
+Reason: 
+Line \ref{c4:l4} is executed $n-1$ times.
+\end{mdframed}
+
+\item Polynomial Evaluation
+\begin{mdframed}
+\begin{lstlisting}[label=c5]
+int polyeval(int coeff[],int n,int x) {
+    int y = 1, value = coeff[0];
+    for(int i = 1;i <= n;i++) {
+        y = y * x; @\label{c5:l4}@
+        value += y * coeff[i]; @\label{c5:l5}@
+    }
+    return value;
+}
+\end{lstlisting}
+
+\fbox{Time Complexity: $2n$ Multiplication \& $n$ Addition}
+\vspace{3mm}
+
+Reason: 
+Line \ref{c5:l4} \& \ref{c5:l5} shows multiplication is done $2n$ times and addition operation is done $n$ times.
+\end{mdframed}
+
+\item Polynomial Evaluation using Horner's Algorithm
+\begin{mdframed}
+\begin{lstlisting}[label=c6]
+int horner(int coeff[],int n,int x) {
+    int value = coeff[n];
+    for(int i = 1;i <= n;i++) 
+        value = value * x + coeff[n-i];
+    return value;
+}
+\end{lstlisting}
+
+\fbox{Time Complexity: $n$ Multiplication \& $n$ Addition}
+\vspace{3mm}
+
+Reason: 
+Let's assume a polynomial $3x^2+3x+1$. By previous method we were simply substituting $x$ into the equation. In case of Horner's Algorithm we simplified the expression i.e. $3x^2+3x+1 = x \underbrace{(3x+3)}_{\textrm{\tiny{evaluated first}}}+1$.
+\end{mdframed}
+
+\item Rank Sorting
+\begin{mdframed}
+\begin{lstlisting}[label=c7]
+void rank(int a[],int n,int r[]) {
+    for(int i=0;i < n;i++) r[i] = 0;
+    for(int i=1;i < n;i++) @\label{c7:l3}@ 
+        for(int j = 0;j < i;j++) @\label{c7:l4}@
+            if(a[j] <= api])
+                r[i]++;
+            else
+                r[j]++;
+}
+
+void rearrange(int a[],int n,int r[]) {
+    int *n = new int[n];
+    for(int i = 0;i < n;i++) u[r[i]] = a[i]; @\label{c7:l13}@
+    for(int i = 0;i < n;i++) a[i] = u[i]; @\label{c7:l14}@
+    delete u[];
+}
+\end{lstlisting}
+
+\fbox{Time Complexity: $\frac{n(n-1)}{2}+2n$}
+\vspace{3mm}
+
+Reason: 
+As in Line \ref{c7:l3} iterable $i$ goes from 1 to $n-1$ the iterable $j$ in Line \ref{c7:l4} goes from 0 to $i-1$ for every value of $i$ i.e. if $i=1$ then $j: 0\rightarrow0$, if $i=2$ then $j: 0\rightarrow1$ \dots if $i=n-1$ then $j:0\rightarrow n-2$ which can be simplified as sum of number of iterations of j: \[\sum_{i=0}^{n-1} i = \frac{n(n-1)}{2}\]
+
+And from Line \ref{c7:l13} \& \ref{c7:l14} we get the $2n$ operations.
+\end{mdframed}
+
+\item  Selection Sort
+\begin{mdframed}
+\begin{lstlisting}[label=c8]
+void SelectionSort(int a[],int n) {
+    for(int size = n;size > 1;size--) {
+        int j = max(a,size);
+        std::swap(a[j],a[size-1]);
+    }
+}
+
+int max(int a[],int n) {
+    int pos = 0;
+    for(inr i = 1;i < n;i++)
+        if(a[pos] < a[i])
+            pos = i;
+    return pos;
+}
+\end{lstlisting}
+\fbox{Time Complexity: $\frac{n(n-1)}{2}+3(n-1)$}
+\vspace{3mm}
+
+Reason: The $3(n-1)$ factor comes from swapping $n-1$ times while the former follows same pattern as precious Q.\ref{c7}.
+\end{mdframed}
+
+\item Transpose with Step-Counter method
+\begin{mdframed}
+\begin{lstlisting}[label=c9]
+void transpose(int **n,int r) {
+    for(int i = 0;i < r;i++)
+        for(int j = i+1;j < r;j++)
+            std::swap(a[i][j],a[j][i]);
+}
+\end{lstlisting}
+\fbox{Time Complexity:  $\frac{(r-1)r}{2} + \frac{r(r+1)}{2} + (r+1)$}
+\vspace{3mm}
+
+Reason: 
+Let's count the steps, time taken, total execution time with a table.
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Line & $t$ & $\nu$ & $\nu\times t$  \\
+\hline
+1 & 0 & 0 & 0 \\
+2 & 0 & 0 & 0 \\
+3 & 1 & $r+1$ & $r+1$ \\
+4 & 1 & $\frac{r(r+1)}{2}$ & $\frac{r(r+1)}{2}$\footnote{r+1 because of exit loop condition} \\
+5 & 1 & $\frac{(r-1)r}{2}$ & $\frac{(r-1)r}{2}$ \\
+\hline
+\multicolumn{3}{|c|}{Total Time} & $r^2+r+1$\\
+\hline
+\end{tabular}
+\end{center}
+\end{mdframed}
+\end{enumerate}
+
+\end{document}
+
+% Template for Sample Q
+% \item  
+% \begin{mdframed}
+% \begin{lstlisting}[label=cX]
+    
+% \end{lstlisting}
+% \fbox{Time Complexity: $\frac{n(n-1)}{2}+2n$}
+% \vspace{3mm}
+
+% Reason: 
+% \end{mdframed}

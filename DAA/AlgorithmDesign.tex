@@ -1,0 +1,57 @@
+\documentclass[12pt]{article}
+
+\usepackage{subfiles}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{mdframed}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{fancybox,framed}
+\usepackage{caption}
+
+\newtcolorbox{notes}{
+  title=NOTE,
+  colframe=black,
+  colback=white,
+  arc=6pt,
+  fonttitle=\rmfamily
+}
+
+\lstdefinestyle{custom}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=b,
+  xrightmargin=0.5cm,
+  language=c++,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+  numbers=right,
+  stepnumber=1,
+  captionpos=b
+}
+
+\lstset{escapechar=@,style=custom}
+
+\captionsetup{labelformat=empty,labelsep=none}
+
+\title{Design and Analysis of Algorithms}
+\author{Nikesh Kumar}
+\date{3rd January 2020}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\newpage
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+% - - - - - - INTRODUCTION - - - - - - 
+\subfile{Introduction.tex}
+
+\end{document}

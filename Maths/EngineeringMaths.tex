@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[12pt,a4paper]{article}
 
 \usepackage{subfiles}
 \usepackage{hyperref}
@@ -41,6 +41,7 @@
 
 \lstset{escapechar=@,style=custom}
 
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
 
 \title{Engineering Mathematics IV}
 \author{Nikesh Kumar}
@@ -65,5 +66,8 @@
 
 % - - - - - - RANDOM VARIABLES - - - - - - 
 \subfile{RandomVariables.tex}
+\newpage
 
+% - - - - - - DISTRIBUTIONS - - - - - - 
+\subfile{Distributions.tex}
 \end{document}

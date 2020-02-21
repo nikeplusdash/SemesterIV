@@ -1,0 +1,43 @@
+\documentclass[./EngineeringMaths.tex]{subfiles}
+
+\begin{document}
+\section{Distributions}
+\begin{mdframed}
+Types of Distributions:
+\begin{itemize}
+\item Binomial
+\item Poisson
+\item Normal
+\item Gamma
+\item Exponential
+\item Chisquare
+\item Uniform
+\end{itemize}
+\end{mdframed}
+
+% = = = = = = BINOMIAL DISTRIBUTION = = = = = =
+\subsection{Binomial Distribution}
+
+Here there are 2 events such that if probability of one is $p$, then the probability of other is $1-p$. Probability is in terms of a random variable $X$ that denotes number of favorable cases.
+
+\begin{center}
+    \fbox{$P(X=k) = \binom{n}{k} p^k\,(1-p)^{n-k}$}
+\end{center}
+
+It is denoted by \fbox{$X\sim B(n,p)$}.
+
+\begin{center}
+{\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|c|c|c|}
+    \hline
+    $X:$ & 0 & 1 &\dots& n-1 & n \\ \hline
+    $P(X=k):$ & $1-p)^n$ & $\binom{n}{1} p\,(1-p)^{n-1}$  &\dots& $\binom{n}{n-1} p^n-1\,(1-p)$ & $\binom{n}{n} p^n$ \\ \hline
+\end{tabular}
+}
+\begin{itemize}
+\item $E(x) = np$
+\item $E(x^2) = n(n-1)p^2 + np$
+\item $V(x) = np(p-1) = npq$
+\end{itemize}
+\end{center}
+\end{document}
